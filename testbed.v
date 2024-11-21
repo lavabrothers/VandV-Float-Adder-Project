@@ -1,106 +1,113 @@
-module test_4bit_multiplier;
-    // Define inputs and outputs
-    reg [7:0] a, b;              // Inputs
-    wire [7:0] output_byte;      // Output
-    reg clock, reset;            // Clock and Reset
+// Code your testbench here
+// or browse Examples
 
-    // Instantiate the unit under test (UUT)
-    pipelined_multiplier uut (
-        .a(a),
-        .b(b),
-        .output_byte(output_byte),
-        .clk(clock),
-        .rst(reset)
+`timescale 1ns / 1ps
+
+module testbench;
+    reg  [7:0] ui_in, uio_in;
+    reg        ena, clk, rst_n;
+    wire [7:0] uo_out;
+
+    // Instantiate the DUT
+    tt_um_btflv_8bit_fp_adder dut (
+        .ui_in(ui_in),
+        .uo_out(uo_out),
+        .uio_in(uio_in),
+        .uio_out(),
+        .uio_oe(),
+        .ena(ena),
+        .clk(clk),
+        .rst_n(rst_n)
     );
 
     // Clock generation
-    initial begin
-        clock = 0;
-        forever #5 clock = ~clock; // 10ns clock period
-    end
+    initial clk = 0;
+    always #5 clk = ~clk;
 
-    // Reset sequence
-    task reset_project;
-        begin
-            reset = 1;
+    // Generate random input values
+    integer i;
+    reg [7:0] expected_output;
+
+    initial begin
+        // Initialize inputs
+        rst_n = 0;
+        ena = 0;
+        ui_in = 8'd0;
+        uio_in = 8'd0;
+        
+        // Reset the DUT
+        #10 rst_n = 1;
+        ena = 1;
+
+        // Test multiple random values
+        for (i = 0; i < 10; i = i + 1) begin
+            // Generate random inputs
+            ui_in = $random % 256;
+            uio_in = $random % 256;
+
+            // Wait for a clock edge to update the output
             #10;
-            reset = 0;
-        end
-    endtask
 
-    // Convert custom floating-point to real number (Verilog equivalent of `to_float`)
-    function real to_float(input [7:0] n);
-        integer exp;
-        real mant, val;
+            // Calculate the expected output
+            expected_output = calculate_expected_output(ui_in, uio_in);
+
+            // Print both results
+            $display(
+                "Test %0d: ui_in = %b, uio_in = %b | Expected = %b, DUT Output = %b | %s",
+                i, ui_in, uio_in, expected_output, uo_out,
+                (uo_out === expected_output) ? "PASS" : "FAIL"
+            );
+        end
+
+        // End simulation
+        $finish;
+    end
+
+    // Reference model for expected output
+    function [7:0] calculate_expected_output(
+        input [7:0] a,
+        input [7:0] b
+    );
+        reg sign_a, sign_b, sign_res;
+        reg [3:0] expo_a, expo_b, expo_res;
+        reg [3:0] mant_a, mant_b, mant_res;
+        reg add_sub; // 0 = add, 1 = subtract
         begin
-            exp = (n[6:3]);       // Extract exponent
-            mant = n[2:0];       // Extract mantissa
-            if (exp == 0) begin
-                val = mant * 0.001953125; // Smallest representable value
-            end else if (exp == 15) begin
-                if (mant == 0) val = $realtobits(1.0/0.0); // Infinity
-                else val = $realtobits(0.0/0.0);           // NaN
+            sign_a = a[7];
+            sign_b = b[7];
+            expo_a = a[6:3];
+            expo_b = b[6:3];
+            mant_a = {1'b1, a[2:0]};
+            mant_b = {1'b1, b[2:0]};
+
+            add_sub = (sign_a ^ sign_b); // XOR to determine operation type
+            
+            if (expo_a > expo_b) begin
+                expo_res = expo_a;
+                mant_b = mant_b >> (expo_a - expo_b);
             end else begin
-                mant = mant + 8;
-                val = mant * 0.001953125 * (2.0 ** (exp - 1));
+                expo_res = expo_b;
+                mant_a = mant_a >> (expo_b - expo_a);
             end
-            if (n[7] == 1) val = -val; // Apply sign
-            to_float = val;
+
+            if (add_sub) begin
+                if (mant_a >= mant_b) begin
+                    mant_res = mant_a - mant_b;
+                    sign_res = sign_a;
+                end else begin
+                    mant_res = mant_b - mant_a;
+                    sign_res = sign_b;
+                end
+            end else begin
+                mant_res = mant_a + mant_b;
+                if (mant_res[4]) begin
+                    mant_res = mant_res >> 1;
+                    expo_res = expo_res + 1;
+                end
+                sign_res = sign_a;
+            end
+
+            calculate_expected_output = {sign_res, expo_res, mant_res[2:0]};
         end
     endfunction
-
-    // Test all values
-    initial begin
-        reset_project(); // Reset the project
-        integer i, j;
-        real fa, fb, fo, max_diff;
-        for (i = 0; i < 256; i = i + 1) begin
-            for (j = 0; j < 256; j = j + 1) begin
-                a = i;
-                b = j;
-                #10; // Wait for one clock cycle
-                fa = to_float(a);
-                fb = to_float(b);
-                fo = to_float(output_byte);
-                if ((fa + fb > 240 && fo == $realtobits(1.0/0.0)) || 
-                    (fa + fb < -240 && fo == $realtobits(-1.0/0.0))) begin
-                    // Correctly handled overflow
-                    continue;
-                end
-                max_diff = max(abs(fa), abs(fb), abs(fa + fb)) / 8.0;
-                if (abs(fo - (fa + fb)) > max_diff) begin
-                    $display("%f + %f != %f (diff %f, raw %d, %d, %d)",
-                             fa, fb, fo, abs(fo - (fa + fb)), a, b, output_byte);
-                end
-            end
-        end
-        $stop; // End the simulation
-    end
-
-    // Helper function: Maximum of three real numbers
-    function real max(input real x, y, z);
-        begin
-            if (x > y && x > z) max = x;
-            else if (y > z) max = y;
-            else max = z;
-        end
-    endfunction
-endmodule
-
-// Example pipelined multiplier module (stub, replace with actual logic)
-module pipelined_multiplier (
-    input [7:0] a,
-    input [7:0] b,
-    output reg [7:0] output_byte,
-    input clk,
-    input rst
-);
-    always @(posedge clk or posedge rst) begin
-        if (rst) begin
-            output_byte <= 0;
-        end else begin
-            // Add pipelined multiplier logic here
-            output_byte <= a + b; // Placeholder for actual logic
-        end
-    end
 endmodule
