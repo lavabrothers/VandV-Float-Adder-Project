@@ -23,6 +23,13 @@ module tb_um_btflv_8bit_fp_adder;
   real decimal_b;
   real result;
   
+  // Test summary variables
+  integer test_number = 0;
+  integer failed_tests[$];  // Queue to store failed test numbers
+  real failed_inputs[$];    // Queue to store input values for failed tests
+  real failed_expected[$];  // Queue to store expected values for failed tests
+  real failed_results[$];   // Queue to store actual results for failed tests
+  
   // Define covergroup types first
   typedef struct {
     logic sign;
@@ -165,6 +172,32 @@ module tb_um_btflv_8bit_fp_adder;
     comp.exponent = value[6:3];
     comp.mantissa = value[2:0];
   endfunction
+
+  // Function to print test summary
+  function void print_test_summary();
+    $display("\n=== Test Summary ===");
+    $display("Total Tests Run: %0d", total);
+    $display("Tests Passed: %0d", correct);
+    $display("Tests Failed: %0d", total - correct);
+    $display("Pass Rate: %0.2f%%", percentage);
+    
+    if (failed_tests.size() > 0) begin
+      $display("\n=== Failed Test Details ===");
+      for (int i = 0; i < failed_tests.size(); i++) begin
+        $display("\nTest #%0d:", failed_tests[i]);
+        $display("Input A: %f", failed_inputs[2*i]);
+        $display("Input B: %f", failed_inputs[2*i+1]);
+        $display("Expected: %f", failed_expected[i]);
+        $display("Actual: %f", failed_results[i]);
+        $display("Difference: %f", $abs(failed_expected[i] - failed_results[i]));
+      end
+    end
+    
+    if (percentage == 100)
+      $display("\nTEST PASSED: All calculations within tolerance");
+    else
+      $display("\nTEST FAILED: Some calculations exceeded tolerance");
+  endfunction
   
   // Main test sequence
   initial begin
@@ -178,6 +211,7 @@ module tb_um_btflv_8bit_fp_adder;
     
     // Initialize inputs
     repeat (total) begin
+      test_number++;
       assert(nums.randomize()) else $error("Randomization failed");
       clk = 0;
       rst_n = 0;       // Start with reset active
@@ -213,11 +247,7 @@ module tb_um_btflv_8bit_fp_adder;
       decimal_a = convert_to_decimal(a);
       decimal_b = convert_to_decimal(b);
       expected = decimal_a + decimal_b;
-
-      $display("expected = %f", expected);
-
       result = convert_to_decimal(out);
-      $display("result = %f", result);
 
       // Sample result coverage
       extract_components(out, fp_components_result);
@@ -225,14 +255,23 @@ module tb_um_btflv_8bit_fp_adder;
 
       if ($abs(expected - result) < tolerance) begin
         correct++;
+      end else begin
+        // Store failed test information
+        failed_tests.push_back(test_number);
+        failed_inputs.push_back(decimal_a);
+        failed_inputs.push_back(decimal_b);
+        failed_expected.push_back(expected);
+        failed_results.push_back(result);
       end          
     end
     
     percentage = (correct / total) * 100;
-    $display("correct percentage = %f", percentage);
+    
+    // Print final test summary
+    print_test_summary();
     
     // Print coverage report
-    $display("Coverage Report:");
+    $display("\n=== Coverage Report ===");
     $display("Control Coverage: %0.2f%%", $get_coverage());
     
     #100 $finish;
