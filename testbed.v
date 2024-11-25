@@ -1,113 +1,241 @@
-// Code your testbench here
-// or browse Examples
-
 `timescale 1ns / 1ps
 
-module testbench;
-    reg  [7:0] ui_in, uio_in;
-    reg        ena, clk, rst_n;
-    wire [7:0] uo_out;
+module tb_um_btflv_8bit_fp_adder;
+ 
+// inputs 
+  reg [7:0] a;
+  reg [7:0] b;
+  reg ena, clk, rst_n;
+  
+// outputs
+  wire [7:0] out;
+  wire [7:0] uio_oe; // IOs: Enable path (active high: 0=input, 1=output)
+  wire [7:0] uio_out; // IOs: Output path
+  
+  // test counts and variables 
+  real total = 100;
+  real correct = 0;
+  real percentage;
+  real tolerance = 0.125;
+  
+  real expected;
+  real decimal_a;
+  real decimal_b;
+  real result;
+  
+  // Define covergroup types first
+  typedef struct {
+    logic sign;
+    logic [3:0] exponent;
+    logic [2:0] mantissa;
+  } fp_components;
+  
+  // Coverage group for floating point components
+  covergroup fp_components_cov;
+      option.per_instance = 1;
+      option.goal = 100;
+      
+      cp_sign: coverpoint fp_components_a.sign {
+          bins negative = {1'b1};
+          bins positive = {1'b0};
+      }
+      
+      cp_exponent: coverpoint fp_components_a.exponent {
+          bins zero = {4'h0};
+          bins low = {[4'h1:4'h3]};
+          bins mid = {[4'h4:4'h7]};
+          bins high = {[4'h8:4'hB]};
+          bins max = {[4'hC:4'hF]};
+      }
+      
+      cp_mantissa: coverpoint fp_components_a.mantissa {
+          bins zero = {3'h0};
+          bins low = {[3'h1:3'h3]};
+          bins high = {[3'h4:3'h7]};
+      }
+      
+      cp_special_cases: cross cp_sign, cp_exponent, cp_mantissa {
+          bins zero_value = binsof(cp_mantissa.zero) && binsof(cp_exponent.zero);
+          bins max_value = binsof(cp_mantissa.high) && binsof(cp_exponent.max);
+      }
+  endgroup
 
-    // Instantiate the DUT
-    tt_um_btflv_8bit_fp_adder dut (
-        .ui_in(ui_in),
-        .uo_out(uo_out),
-        .uio_in(uio_in),
-        .uio_out(),
-        .uio_oe(),
-        .ena(ena),
-        .clk(clk),
-        .rst_n(rst_n)
-    );
+  // Control signals coverage group
+  covergroup ctrl_signals_cov;
+      option.per_instance = 1;
+      
+      cp_ena: coverpoint ena {
+          bins disabled = {1'b0};
+          bins enabled = {1'b1};
+      }
+      
+      cp_rst_n: coverpoint rst_n {
+          bins reset = {1'b0};
+          bins active = {1'b1};
+      }
+      
+      cp_control_combo: cross cp_ena, cp_rst_n {
+          bins valid_combinations = binsof(cp_ena) && binsof(cp_rst_n);
+      }
+  endgroup
+  
+  // Instantiate coverage
+  fp_components fp_components_a, fp_components_b, fp_components_result;
+  fp_components_cov fp_cov_a, fp_cov_b, fp_cov_result;
+  ctrl_signals_cov ctrl_cov;
+  
+  tt_um_btflv_8bit_fp_adder adder(
+    .ui_in(a),
+    .uio_in(b),
+    .ena(ena),
+    .clk(clk),
+    .rst_n(rst_n),
+    .uo_out(out),
+    .uio_out(uio_out),
+    .uio_oe(uio_oe)
+  );
+      
+  // Function to convert 8-bit input to decimal floating point
+  function real convert_to_decimal(input logic [7:0] fp_input);
+      real decimal_value = 0;
+      real mantissa_value = 0;
+      real exponent_value = 0;
+      logic sign;
+      logic [3:0] exponent;
+      logic [2:0] mantissa;
+      integer expo = 1;
+      
+      // Extract the sign, exponent, and mantissa from the 8-bit input
+      sign = fp_input[7];              // MSB is the sign bit
+      exponent = fp_input[6:3];        // Next 4 bits are the exponent
+      mantissa = fp_input[2:0];        // Last 3 bits are the mantissa
+    
+      // Convert mantissa to real (normalized: 1.mantissa in binary)
+      mantissa_value = 1.0;            // Implicit leading 1 in normalized form
+      for (int i = 2; i >= 0; i--) begin
+        if(mantissa[i] == 1) begin
+          mantissa_value += ((2.0 ** -(expo)));
+        end 
+        expo++;
+      end
+      expo = 1;
+      
+      // Convert exponent to real, applying bias of 7 for 4-bit exponent
+      exponent_value = exponent - 7.0;
 
-    // Clock generation
-    initial clk = 0;
-    always #5 clk = ~clk;
+      // Calculate the decimal value (with sign)
+      decimal_value = (sign ? -1 : 1) * mantissa_value * (2.0 ** exponent_value);
 
-    // Generate random input values
-    integer i;
-    reg [7:0] expected_output;
-
-    initial begin
-        // Initialize inputs
-        rst_n = 0;
-        ena = 0;
-        ui_in = 8'd0;
-        uio_in = 8'd0;
-        
-        // Reset the DUT
-        #10 rst_n = 1;
-        ena = 1;
-
-        // Test multiple random values
-        for (i = 0; i < 10; i = i + 1) begin
-            // Generate random inputs
-            ui_in = $random % 256;
-            uio_in = $random % 256;
-
-            // Wait for a clock edge to update the output
-            #10;
-
-            // Calculate the expected output
-            expected_output = calculate_expected_output(ui_in, uio_in);
-
-            // Print both results
-            $display(
-                "Test %0d: ui_in = %b, uio_in = %b | Expected = %b, DUT Output = %b | %s",
-                i, ui_in, uio_in, expected_output, uo_out,
-                (uo_out === expected_output) ? "PASS" : "FAIL"
-            );
-        end
-
-        // End simulation
-        $finish;
-    end
-
-    // Reference model for expected output
-    function [7:0] calculate_expected_output(
-        input [7:0] a,
-        input [7:0] b
-    );
-        reg sign_a, sign_b, sign_res;
-        reg [3:0] expo_a, expo_b, expo_res;
-        reg [3:0] mant_a, mant_b, mant_res;
-        reg add_sub; // 0 = add, 1 = subtract
-        begin
-            sign_a = a[7];
-            sign_b = b[7];
-            expo_a = a[6:3];
-            expo_b = b[6:3];
-            mant_a = {1'b1, a[2:0]};
-            mant_b = {1'b1, b[2:0]};
-
-            add_sub = (sign_a ^ sign_b); // XOR to determine operation type
-            
-            if (expo_a > expo_b) begin
-                expo_res = expo_a;
-                mant_b = mant_b >> (expo_a - expo_b);
-            end else begin
-                expo_res = expo_b;
-                mant_a = mant_a >> (expo_b - expo_a);
-            end
-
-            if (add_sub) begin
-                if (mant_a >= mant_b) begin
-                    mant_res = mant_a - mant_b;
-                    sign_res = sign_a;
-                end else begin
-                    mant_res = mant_b - mant_a;
-                    sign_res = sign_b;
-                end
-            end else begin
-                mant_res = mant_a + mant_b;
-                if (mant_res[4]) begin
-                    mant_res = mant_res >> 1;
-                    expo_res = expo_res + 1;
-                end
-                sign_res = sign_a;
-            end
-
-            calculate_expected_output = {sign_res, expo_res, mant_res[2:0]};
-        end
+      return decimal_value;
+  endfunction
+  
+  class testNums;
+    rand bit sign_a;
+    rand bit sign_b;
+    rand bit [3:0] exponent_a;
+    rand bit [3:0] exponent_b;
+    rand bit [2:0] mantissa_a;
+    rand bit [2:0] mantissa_b;
+    
+    // constraints
+    constraint distro {
+      mantissa_a dist{0 :/ 30, [1:3] :/ 30 , [4:7] :/ 40 };
+      mantissa_b dist{0 :/ 30, [1:3] :/ 30 , [4:7] :/ 40 };
+      exponent_a dist{0 :/ 30, [1:7] :/ 30 , [8:16]:/ 40 };
+      exponent_b dist{0 :/ 30, [1:7] :/ 30 , [8:16]:/ 40 };
+    }
+    
+    // Function to combine sign, exponent, and mantissa into an 8-bit number
+    function bit [7:0] combine_to_8bit_a();
+      combine_to_8bit_a = {sign_a, exponent_a, mantissa_a}; // Concatenate fields
     endfunction
+
+    // Function to combine sign, exponent, and mantissa into an 8-bit number for 'b'
+    function bit [7:0] combine_to_8bit_b();
+      combine_to_8bit_b = {sign_b, exponent_b, mantissa_b}; // Concatenate fields
+    endfunction
+  endclass
+  
+  // create the clock
+  always #10 clk = ~clk;
+  
+  // Function to extract components
+  function void extract_components(input logic [7:0] value, output fp_components comp);
+    comp.sign = value[7];
+    comp.exponent = value[6:3];
+    comp.mantissa = value[2:0];
+  endfunction
+  
+  // Main test sequence
+  initial begin
+    testNums nums = new();
+    
+    // Initialize coverage
+    fp_cov_a = new();
+    fp_cov_b = new();
+    fp_cov_result = new();
+    ctrl_cov = new();
+    
+    // Initialize inputs
+    repeat (total) begin
+      assert(nums.randomize()) else $error("Randomization failed");
+      clk = 0;
+      rst_n = 0;       // Start with reset active
+      ena = 0;
+      a = 0;
+      b = 0;
+
+      // Sample control coverage
+      ctrl_cov.sample();
+
+      // Wait 20 time units then de-assert reset
+      rst_n = 1;
+      #20;
+
+      // Apply test values and enable
+      ena = 1;
+      #20;
+
+      a = nums.combine_to_8bit_a();
+      b = nums.combine_to_8bit_b();
+      
+      // Extract components and sample coverage
+      extract_components(a, fp_components_a);
+      extract_components(b, fp_components_b);
+      fp_cov_a.sample();
+      fp_cov_b.sample();
+      
+      // Sample control coverage after changes
+      ctrl_cov.sample();
+      
+      #60;
+      
+      decimal_a = convert_to_decimal(a);
+      decimal_b = convert_to_decimal(b);
+      expected = decimal_a + decimal_b;
+
+      $display("expected = %f", expected);
+
+      result = convert_to_decimal(out);
+      $display("result = %f", result);
+
+      // Sample result coverage
+      extract_components(out, fp_components_result);
+      fp_cov_result.sample();
+
+      if ($abs(expected - result) < tolerance) begin
+        correct++;
+      end          
+    end
+    
+    percentage = (correct / total) * 100;
+    $display("correct percentage = %f", percentage);
+    
+    // Print coverage report
+    $display("Coverage Report:");
+    $display("Control Coverage: %0.2f%%", $get_coverage());
+    
+    #100 $finish;
+  end
+  
 endmodule
