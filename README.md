@@ -9,3 +9,6 @@ https://github.com/BTFLV/tt05-btflv-8bit-fp-adder
 
 Here is our Report
 https://docs.google.com/document/d/1BTaOA8ugLkoCM_MxJ8k565kXNDt7dxQ6obPCU23DfCE/edit?usp=sharing
+
+Here is the EDA Playgroud Link to run the code above and get your own results
+https://www.edaplayground.com/x/hDfY
