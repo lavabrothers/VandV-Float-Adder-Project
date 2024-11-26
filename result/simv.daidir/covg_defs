@@ -1,0 +1,213 @@
+global coverage_group 0 tb_um_btflv_8bit_fp_adder::fp_components_cov __coverage_fp_components_cov unused_fp_components_cov_loop_label tb_um_btflv_8bit_fp_adder 0 1 0 0 0  ( 0 
+)
+ 1 1
+ 0 25 /home/runner/testbench.sv
+ 41 0 0 0 0 0 0 0 0  1
+0
+0 0
+ 0
+ 68 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_13
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0 0
+ 0
+ 0 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 68 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_12
+0
+0
+0
+64
+0
+ 0
+
+3
+0
+1
+0
+ 7 cp_sign 45 0 0 0 0 0 65 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn 65 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 0 -1 2 1 0 0 1 0 0 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 2 1 1 0 0 1 1 8 negative 46 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_0 0 0 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 8 positive 47 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_1 0 0 0 0 0 0 0
+ 0
+
+ 11 cp_exponent 50 0 0 0 0 0 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_2 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_2 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 0 -1 2 4 0 0 1 0 0 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 5 1 1 0 0 1 1 4 zero 51 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_3 0 0 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 3 low 52 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_4 0 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_5 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 3 mid 53 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_6 0 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_7 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 4 high 54 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_8 0 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_9 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 3 max 55 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_a 0 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_b 0 0 0 0 0
+ 0
+
+ 11 cp_mantissa 58 0 0 0 0 0 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_c 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_c 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 0 -1 2 3 0 0 1 0 0 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 3 1 1 0 0 1 1 4 zero 59 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_d 0 0 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 3 low 60 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_e 0 67 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_f 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 4 high 61 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 68 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_10 0 68 fp_components_cov::tb_um_btflv_8bit_fp_adder_fp_components_cov_fn_11 0 0 0 0 0
+ 0
+
+ 16 cp_special_cases 0 64 0 0 -1 0 0 0 0 3 0 1 2 -1 0 0 0
+ 0
+ 0
+ 0
+ 0 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 2 1 1 0 0 -1 0 0 1 1 10 zero_value 65 0 1 0 1 3 1 0 2 1 4 zero 0 0 0 0 0 1 0 1 1 4 zero 0 0 0 0 0 0 0 0 0 0 0 0
+ 1 1 0 0 -1 0 0 1 1 9 max_value 66 0 1 0 1 3 1 0 2 1 4 high 0 0 0 0 0 1 0 1 1 3 max 0 0 0 0 0 0 0 0 0 0 0 0
+
+end_coverage_group
+global coverage_group 0 tb_um_btflv_8bit_fp_adder::ctrl_signals_cov __coverage_ctrl_signals_cov unused_ctrl_signals_cov_loop_label tb_um_btflv_8bit_fp_adder 0 1 0 0 0  ( 0 
+)
+ 0 71 0 0 0 0 0 0 0 0  1
+0
+0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0 0
+ 0
+ 0 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 65 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn_3
+0
+0
+0
+64
+0
+ 0
+
+2
+0
+1
+0
+ 6 cp_ena 74 0 0 0 0 0 63 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn 63 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 0 -1 2 1 0 0 0 0 0 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 2 1 1 0 0 1 1 8 disabled 75 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 65 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn_0 0 0 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 7 enabled 76 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 65 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn_1 0 0 0 0 0 0 0
+ 0
+
+ 8 cp_rst_n 79 0 0 0 0 0 65 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn_2 65 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn_2 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 0 -1 2 1 0 0 0 0 0 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 2 1 1 0 0 1 1 5 reset 80 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 65 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn_0 0 0 0 0 0 0 0
+ 0
+ 1 1 0 0 1 1 6 active 81 0 0 1 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 1 1 1 65 ctrl_signals_cov::tb_um_btflv_8bit_fp_adder_ctrl_signals_cov_fn_1 0 0 0 0 0 0 0
+ 0
+
+ 16 cp_control_combo 0 84 0 0 -1 0 0 0 0 2 0 1 -1 0 0 0
+ 0
+ 0
+ 0
+ 0 0
+ 0 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 1 1 1 0 0 -1 0 0 1 1 18 valid_combinations 85 0 1 0 1 3 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+end_coverage_group

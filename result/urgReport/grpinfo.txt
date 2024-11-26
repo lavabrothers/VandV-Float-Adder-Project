@@ -1,0 +1,846 @@
+Group : tb_um_btflv_8bit_fp_adder::ctrl_signals_cov
+
+===============================================================================
+Group : tb_um_btflv_8bit_fp_adder::ctrl_signals_cov
+===============================================================================
+SCORE  INSTANCES WEIGHT GOAL   AT LEAST PER INSTANCE AUTO BIN MAX PRINT MISSING 
+100.00 100.00    1      100    1        1            64           64            
+
+
+Source File(s) : 
+
+/home/runner/testbench.sv
+
+1 Instances:
+
+SCORE  WEIGHT GOAL   AT LEAST AUTO BIN MAX PRINT MISSING NAME     
+100.00 1      100    1        64           64            ctrl_cov 
+
+
+
+
+-------------------------------------------------------------------------------
+
+Summary for Group   tb_um_btflv_8bit_fp_adder::ctrl_signals_cov
+
+
+
+CATEGORY  EXPECTED UNCOVERED COVERED PERCENT 
+Variables 4        0         4       100.00  
+Crosses   1        0         1       100.00  
+
+
+Variables for Group  tb_um_btflv_8bit_fp_adder::ctrl_signals_cov
+
+
+VARIABLE EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST AUTO BIN MAX COMMENT 
+cp_ena   2        0         2       100.00  100  1      1        0                    
+cp_rst_n 2        0         2       100.00  100  1      1        0                    
+
+
+Crosses for Group  tb_um_btflv_8bit_fp_adder::ctrl_signals_cov
+
+
+CROSS            EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST PRINT MISSING COMMENT 
+cp_control_combo 1        0         1       100.00  100  1      1        0                     
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_ena
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_ena
+
+
+Bins
+
+NAME     COUNT AT LEAST 
+enabled  175   1        
+disabled 175   1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_rst_n
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_rst_n
+
+
+Bins
+
+NAME   COUNT AT LEAST 
+active 175   1        
+reset  175   1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Cross cp_control_combo
+
+
+Samples crossed: cp_ena cp_rst_n
+CATEGORY                EXPECTED UNCOVERED COVERED PERCENT MISSING 
+User Defined Cross Bins 1        0         1       100.00          
+
+
+User Defined Cross Bins for cp_control_combo
+
+
+Bins
+
+NAME               COUNT AT LEAST 
+valid_combinations 350   1        
+
+
+-------------------------------------------------------------------------------
+===============================================================================
+Group Instance : ctrl_cov
+===============================================================================
+SCORE  WEIGHT GOAL   AT LEAST AUTO BIN MAX PRINT MISSING 
+100.00 1      100    1        64           64            
+
+
+Group:
+
+SCORE  INSTANCES WEIGHT GOAL   AT LEAST PER INSTANCE AUTO BIN MAX PRINT MISSING COMMENT NAME                                        
+100.00 100.00    1      100    1        1            64           64                    tb_um_btflv_8bit_fp_adder::ctrl_signals_cov 
+
+
+
+-------------------------------------------------------------------------------
+
+Summary for Group Instance   ctrl_cov
+
+
+
+CATEGORY  EXPECTED UNCOVERED COVERED PERCENT 
+Variables 4        0         4       100.00  
+Crosses   1        0         1       100.00  
+
+
+Variables for Group Instance  ctrl_cov
+
+
+VARIABLE EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST AUTO BIN MAX COMMENT 
+cp_ena   2        0         2       100.00  100  1      1        0                    
+cp_rst_n 2        0         2       100.00  100  1      1        0                    
+
+
+Crosses for Group Instance  ctrl_cov
+
+
+CROSS            EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST PRINT MISSING COMMENT 
+cp_control_combo 1        0         1       100.00  100  1      1        0                     
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_ena
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_ena
+
+
+Bins
+
+NAME     COUNT AT LEAST 
+enabled  175   1        
+disabled 175   1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_rst_n
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_rst_n
+
+
+Bins
+
+NAME   COUNT AT LEAST 
+active 175   1        
+reset  175   1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Cross cp_control_combo
+
+
+Samples crossed: cp_ena cp_rst_n
+CATEGORY                EXPECTED UNCOVERED COVERED PERCENT MISSING 
+User Defined Cross Bins 1        0         1       100.00          
+
+
+User Defined Cross Bins for cp_control_combo
+
+
+Bins
+
+NAME               COUNT AT LEAST 
+valid_combinations 350   1        
+
+
+Group : tb_um_btflv_8bit_fp_adder::fp_components_cov
+
+===============================================================================
+Group : tb_um_btflv_8bit_fp_adder::fp_components_cov
+===============================================================================
+SCORE  INSTANCES WEIGHT GOAL   AT LEAST PER INSTANCE AUTO BIN MAX PRINT MISSING 
+100.00 100.00    1      100    1        1            64           64            
+
+
+Source File(s) : 
+
+/home/runner/testbench.sv
+
+3 Instances:
+
+SCORE  WEIGHT GOAL   AT LEAST AUTO BIN MAX PRINT MISSING NAME          
+100.00 1      100    1        64           64            fp_cov_result 
+100.00 1      100    1        64           64            fp_cov_b      
+100.00 1      100    1        64           64            fp_cov_a      
+
+
+
+
+-------------------------------------------------------------------------------
+
+Summary for Group   tb_um_btflv_8bit_fp_adder::fp_components_cov
+
+
+
+CATEGORY  EXPECTED UNCOVERED COVERED PERCENT 
+Variables 10       0         10      100.00  
+Crosses   28       0         28      100.00  
+
+
+Variables for Group  tb_um_btflv_8bit_fp_adder::fp_components_cov
+
+
+VARIABLE    EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST AUTO BIN MAX COMMENT 
+cp_sign     2        0         2       100.00  100  1      1        0                    
+cp_exponent 5        0         5       100.00  100  1      1        0                    
+cp_mantissa 3        0         3       100.00  100  1      1        0                    
+
+
+Crosses for Group  tb_um_btflv_8bit_fp_adder::fp_components_cov
+
+
+CROSS            EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST PRINT MISSING COMMENT 
+cp_special_cases 28       0         28      100.00  100  1      1        0                     
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_sign
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_sign
+
+
+Bins
+
+NAME     COUNT AT LEAST 
+positive 261   1        
+negative 264   1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_exponent
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 5        0         5       100.00  
+
+
+User Defined Bins for cp_exponent
+
+
+Bins
+
+NAME COUNT AT LEAST 
+max  111   1        
+high 135   1        
+mid  72    1        
+low  69    1        
+zero 138   1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_mantissa
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 3        0         3       100.00  
+
+
+User Defined Bins for cp_mantissa
+
+
+Bins
+
+NAME COUNT AT LEAST 
+high 186   1        
+low  198   1        
+zero 141   1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Cross cp_special_cases
+
+
+Samples crossed: cp_sign cp_exponent cp_mantissa
+CATEGORY                           EXPECTED UNCOVERED COVERED PERCENT MISSING 
+TOTAL                              28       0         28      100.00          
+Automatically Generated Cross Bins 26       0         26      100.00          
+User Defined Cross Bins            2        0         2       100.00          
+
+
+Automatically Generated Cross Bins for cp_special_cases
+
+
+Bins
+
+cp_sign  cp_exponent cp_mantissa COUNT AT LEAST 
+positive max         zero        6     1        
+positive max         low         24    1        
+positive high        low         12    1        
+positive high        zero        18    1        
+positive high        high        30    1        
+positive mid         low         9     1        
+positive mid         zero        21    1        
+positive mid         high        3     1        
+positive low         zero        9     1        
+positive low         low         15    1        
+positive low         high        18    1        
+positive zero        low         27    1        
+positive zero        high        33    1        
+negative max         zero        9     1        
+negative max         low         18    1        
+negative high        zero        21    1        
+negative high        low         36    1        
+negative high        high        18    1        
+negative mid         low         18    1        
+negative mid         zero        9     1        
+negative mid         high        12    1        
+negative low         zero        9     1        
+negative low         low         12    1        
+negative low         high        6     1        
+negative zero        low         27    1        
+negative zero        high        12    1        
+
+
+User Defined Cross Bins for cp_special_cases
+
+
+Bins
+
+NAME       COUNT AT LEAST 
+zero_value 39    1        
+max_value  54    1        
+
+
+-------------------------------------------------------------------------------
+===============================================================================
+Group Instance : fp_cov_result
+===============================================================================
+SCORE  WEIGHT GOAL   AT LEAST AUTO BIN MAX PRINT MISSING 
+100.00 1      100    1        64           64            
+
+
+Group:
+
+SCORE  INSTANCES WEIGHT GOAL   AT LEAST PER INSTANCE AUTO BIN MAX PRINT MISSING COMMENT NAME                                         
+100.00 100.00    1      100    1        1            64           64                    tb_um_btflv_8bit_fp_adder::fp_components_cov 
+
+
+
+-------------------------------------------------------------------------------
+
+Summary for Group Instance   fp_cov_result
+
+
+
+CATEGORY  EXPECTED UNCOVERED COVERED PERCENT 
+Variables 10       0         10      100.00  
+Crosses   28       0         28      100.00  
+
+
+Variables for Group Instance  fp_cov_result
+
+
+VARIABLE    EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST AUTO BIN MAX COMMENT 
+cp_sign     2        0         2       100.00  100  1      1        0                    
+cp_exponent 5        0         5       100.00  100  1      1        0                    
+cp_mantissa 3        0         3       100.00  100  1      1        0                    
+
+
+Crosses for Group Instance  fp_cov_result
+
+
+CROSS            EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST PRINT MISSING COMMENT 
+cp_special_cases 28       0         28      100.00  100  1      1        0                     
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_sign
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_sign
+
+
+Bins
+
+NAME     COUNT AT LEAST 
+positive 87    1        
+negative 88    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_exponent
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 5        0         5       100.00  
+
+
+User Defined Bins for cp_exponent
+
+
+Bins
+
+NAME COUNT AT LEAST 
+max  37    1        
+high 45    1        
+mid  24    1        
+low  23    1        
+zero 46    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_mantissa
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 3        0         3       100.00  
+
+
+User Defined Bins for cp_mantissa
+
+
+Bins
+
+NAME COUNT AT LEAST 
+high 62    1        
+low  66    1        
+zero 47    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Cross cp_special_cases
+
+
+Samples crossed: cp_sign cp_exponent cp_mantissa
+CATEGORY                           EXPECTED UNCOVERED COVERED PERCENT MISSING 
+TOTAL                              28       0         28      100.00          
+Automatically Generated Cross Bins 26       0         26      100.00          
+User Defined Cross Bins            2        0         2       100.00          
+
+
+Automatically Generated Cross Bins for cp_special_cases
+
+
+Bins
+
+cp_sign  cp_exponent cp_mantissa COUNT AT LEAST 
+positive max         zero        2     1        
+positive max         low         8     1        
+positive high        low         4     1        
+positive high        zero        6     1        
+positive high        high        10    1        
+positive mid         low         3     1        
+positive mid         zero        7     1        
+positive mid         high        1     1        
+positive low         zero        3     1        
+positive low         low         5     1        
+positive low         high        6     1        
+positive zero        low         9     1        
+positive zero        high        11    1        
+negative max         zero        3     1        
+negative max         low         6     1        
+negative high        zero        7     1        
+negative high        low         12    1        
+negative high        high        6     1        
+negative mid         low         6     1        
+negative mid         zero        3     1        
+negative mid         high        4     1        
+negative low         zero        3     1        
+negative low         low         4     1        
+negative low         high        2     1        
+negative zero        low         9     1        
+negative zero        high        4     1        
+
+
+User Defined Cross Bins for cp_special_cases
+
+
+Bins
+
+NAME       COUNT AT LEAST 
+zero_value 13    1        
+max_value  18    1        
+
+
+-------------------------------------------------------------------------------
+===============================================================================
+Group Instance : fp_cov_b
+===============================================================================
+SCORE  WEIGHT GOAL   AT LEAST AUTO BIN MAX PRINT MISSING 
+100.00 1      100    1        64           64            
+
+
+Group:
+
+SCORE  INSTANCES WEIGHT GOAL   AT LEAST PER INSTANCE AUTO BIN MAX PRINT MISSING COMMENT NAME                                         
+100.00 100.00    1      100    1        1            64           64                    tb_um_btflv_8bit_fp_adder::fp_components_cov 
+
+
+
+-------------------------------------------------------------------------------
+
+Summary for Group Instance   fp_cov_b
+
+
+
+CATEGORY  EXPECTED UNCOVERED COVERED PERCENT 
+Variables 10       0         10      100.00  
+Crosses   28       0         28      100.00  
+
+
+Variables for Group Instance  fp_cov_b
+
+
+VARIABLE    EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST AUTO BIN MAX COMMENT 
+cp_sign     2        0         2       100.00  100  1      1        0                    
+cp_exponent 5        0         5       100.00  100  1      1        0                    
+cp_mantissa 3        0         3       100.00  100  1      1        0                    
+
+
+Crosses for Group Instance  fp_cov_b
+
+
+CROSS            EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST PRINT MISSING COMMENT 
+cp_special_cases 28       0         28      100.00  100  1      1        0                     
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_sign
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_sign
+
+
+Bins
+
+NAME     COUNT AT LEAST 
+positive 87    1        
+negative 88    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_exponent
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 5        0         5       100.00  
+
+
+User Defined Bins for cp_exponent
+
+
+Bins
+
+NAME COUNT AT LEAST 
+max  37    1        
+high 45    1        
+mid  24    1        
+low  23    1        
+zero 46    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_mantissa
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 3        0         3       100.00  
+
+
+User Defined Bins for cp_mantissa
+
+
+Bins
+
+NAME COUNT AT LEAST 
+high 62    1        
+low  66    1        
+zero 47    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Cross cp_special_cases
+
+
+Samples crossed: cp_sign cp_exponent cp_mantissa
+CATEGORY                           EXPECTED UNCOVERED COVERED PERCENT MISSING 
+TOTAL                              28       0         28      100.00          
+Automatically Generated Cross Bins 26       0         26      100.00          
+User Defined Cross Bins            2        0         2       100.00          
+
+
+Automatically Generated Cross Bins for cp_special_cases
+
+
+Bins
+
+cp_sign  cp_exponent cp_mantissa COUNT AT LEAST 
+positive max         zero        2     1        
+positive max         low         8     1        
+positive high        low         4     1        
+positive high        zero        6     1        
+positive high        high        10    1        
+positive mid         low         3     1        
+positive mid         zero        7     1        
+positive mid         high        1     1        
+positive low         zero        3     1        
+positive low         low         5     1        
+positive low         high        6     1        
+positive zero        low         9     1        
+positive zero        high        11    1        
+negative max         zero        3     1        
+negative max         low         6     1        
+negative high        zero        7     1        
+negative high        low         12    1        
+negative high        high        6     1        
+negative mid         low         6     1        
+negative mid         zero        3     1        
+negative mid         high        4     1        
+negative low         zero        3     1        
+negative low         low         4     1        
+negative low         high        2     1        
+negative zero        low         9     1        
+negative zero        high        4     1        
+
+
+User Defined Cross Bins for cp_special_cases
+
+
+Bins
+
+NAME       COUNT AT LEAST 
+zero_value 13    1        
+max_value  18    1        
+
+
+-------------------------------------------------------------------------------
+===============================================================================
+Group Instance : fp_cov_a
+===============================================================================
+SCORE  WEIGHT GOAL   AT LEAST AUTO BIN MAX PRINT MISSING 
+100.00 1      100    1        64           64            
+
+
+Group:
+
+SCORE  INSTANCES WEIGHT GOAL   AT LEAST PER INSTANCE AUTO BIN MAX PRINT MISSING COMMENT NAME                                         
+100.00 100.00    1      100    1        1            64           64                    tb_um_btflv_8bit_fp_adder::fp_components_cov 
+
+
+
+-------------------------------------------------------------------------------
+
+Summary for Group Instance   fp_cov_a
+
+
+
+CATEGORY  EXPECTED UNCOVERED COVERED PERCENT 
+Variables 10       0         10      100.00  
+Crosses   28       0         28      100.00  
+
+
+Variables for Group Instance  fp_cov_a
+
+
+VARIABLE    EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST AUTO BIN MAX COMMENT 
+cp_sign     2        0         2       100.00  100  1      1        0                    
+cp_exponent 5        0         5       100.00  100  1      1        0                    
+cp_mantissa 3        0         3       100.00  100  1      1        0                    
+
+
+Crosses for Group Instance  fp_cov_a
+
+
+CROSS            EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST PRINT MISSING COMMENT 
+cp_special_cases 28       0         28      100.00  100  1      1        0                     
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_sign
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 2        0         2       100.00  
+
+
+User Defined Bins for cp_sign
+
+
+Bins
+
+NAME     COUNT AT LEAST 
+positive 87    1        
+negative 88    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_exponent
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 5        0         5       100.00  
+
+
+User Defined Bins for cp_exponent
+
+
+Bins
+
+NAME COUNT AT LEAST 
+max  37    1        
+high 45    1        
+mid  24    1        
+low  23    1        
+zero 46    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable cp_mantissa
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 3        0         3       100.00  
+
+
+User Defined Bins for cp_mantissa
+
+
+Bins
+
+NAME COUNT AT LEAST 
+high 62    1        
+low  66    1        
+zero 47    1        
+
+
+-------------------------------------------------------------------------------
+
+Summary for Cross cp_special_cases
+
+
+Samples crossed: cp_sign cp_exponent cp_mantissa
+CATEGORY                           EXPECTED UNCOVERED COVERED PERCENT MISSING 
+TOTAL                              28       0         28      100.00          
+Automatically Generated Cross Bins 26       0         26      100.00          
+User Defined Cross Bins            2        0         2       100.00          
+
+
+Automatically Generated Cross Bins for cp_special_cases
+
+
+Bins
+
+cp_sign  cp_exponent cp_mantissa COUNT AT LEAST 
+positive max         zero        2     1        
+positive max         low         8     1        
+positive high        low         4     1        
+positive high        zero        6     1        
+positive high        high        10    1        
+positive mid         low         3     1        
+positive mid         zero        7     1        
+positive mid         high        1     1        
+positive low         zero        3     1        
+positive low         low         5     1        
+positive low         high        6     1        
+positive zero        low         9     1        
+positive zero        high        11    1        
+negative max         zero        3     1        
+negative max         low         6     1        
+negative high        zero        7     1        
+negative high        low         12    1        
+negative high        high        6     1        
+negative mid         low         6     1        
+negative mid         zero        3     1        
+negative mid         high        4     1        
+negative low         zero        3     1        
+negative low         low         4     1        
+negative low         high        2     1        
+negative zero        low         9     1        
+negative zero        high        4     1        
+
+
+User Defined Cross Bins for cp_special_cases
+
+
+Bins
+
+NAME       COUNT AT LEAST 
+zero_value 13    1        
+max_value  18    1        
+
+

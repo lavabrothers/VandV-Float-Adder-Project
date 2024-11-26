@@ -1,0 +1,29 @@
+<session version="1.1" release="U-2023.03-SP2" timestp="2024-11-26 21:57:30 GMT">
+  <info>
+    <attr name="datetime" value="Tue Nov 26 16:57:31 2024
+"/>
+    <attr name="command" value="urg -dir simv.vdb -format both"/>
+  </info>
+  <hvp>
+    <datadef>
+      <metdef name="Group" type="percent" aggregator="average" builtin="1" />
+    </datadef>
+  </hvp>
+  <old_coverage>
+  <scope type="top" name="top">
+    <metric name="Group" value="100%" />
+  </scope>
+  <scope type="instance" name="top">
+  </scope>
+  <scope type="group" name="top">
+    <scope type="group" name="tb_um_btflv_8bit_fp_adder::ctrl_signals_cov">
+      <metric name="Group" value="100%" />
+    </scope>
+    <scope type="group" name="tb_um_btflv_8bit_fp_adder::fp_components_cov">
+      <metric name="Group" value="100%" />
+    </scope>
+  </scope>
+  <scope type="assert" name="Statistics">
+  </scope>
+  </old_coverage>
+</session>
